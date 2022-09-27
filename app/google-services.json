@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1045794692713",
+    "project_id": "safeboda-test-92e7e",
+    "storage_bucket": "safeboda-test-92e7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045794692713:android:08e78ad9ff262c1aae8cf8",
+        "android_client_info": {
+          "package_name": "com.example.safebodatest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045794692713-9a7v167hr8hl03a8h1hhptj0abf7epkf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT33BLMaCk6yfnY_KVfTLW0PYr3oAgQJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045794692713-9a7v167hr8hl03a8h1hhptj0abf7epkf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
