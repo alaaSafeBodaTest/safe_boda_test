@@ -24,8 +24,8 @@ object ServiceGenerator {
             val original = chain.request()
             val request = original
                 .newBuilder()
-                .addHeader(Keys.TOKEN, token)
-                .addHeader(Keys.ACCEPT, "application/vnd.github+json")
+                .addHeader(Keys.AUTHORIZATION, "Bearer $token")
+                .addHeader(Keys.ACCEPT, "*/*")
                 .method(original.method, original.body)
                 .build()
             return chain.proceed(request)

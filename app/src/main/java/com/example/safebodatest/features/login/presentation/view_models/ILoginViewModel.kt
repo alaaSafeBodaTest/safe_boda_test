@@ -4,6 +4,8 @@ interface ILoginViewModel {
 
     fun onSignInClicked() {}
 
-    fun login() {}
+    fun storeToken(token: String) {}
+
+    suspend fun fetchUserAccount() {}
 
 }

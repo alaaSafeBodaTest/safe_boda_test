@@ -12,11 +12,11 @@ interface UserDao {
     @Query("SELECT * FROM user")
     suspend fun getAll(): List<User>
 
-    @Query("SELECT * FROM user WHERE username IN (:usernames)")
-    suspend fun loadAllByIds(usernames: IntArray): List<User>
+    @Query("SELECT * FROM user WHERE id IN (:ids)")
+    suspend fun loadAllByIds(ids: IntArray): List<User>
 
     @Insert
-    suspend fun insertAll(vararg users: User)
+    suspend fun insertAll(vararg users: User): List<Long>
 
     @Delete
     suspend fun delete(user: User)

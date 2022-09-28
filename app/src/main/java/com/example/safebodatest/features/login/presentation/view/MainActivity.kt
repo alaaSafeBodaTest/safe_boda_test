@@ -5,8 +5,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
 import com.example.safebodatest.core.network_utils.NetworkUtils
+import com.example.safebodatest.core.preferences.PreferenceManager
 import com.example.safebodatest.core.utils.GithubUtils
 import com.example.safebodatest.databinding.ActivityMainBinding
 import com.example.safebodatest.features.login.presentation.actions.LoginActions
@@ -17,6 +19,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.OAuthCredential
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,6 +34,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var githubUtils: GithubUtils
 
+    @Inject
+    lateinit var preferenceManager: PreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -40,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun setObservers() {
 
         (viewModel as LoginViewModel).actionObserver.observe(this) {
-            when(it){
+            when (it) {
                 LoginActions.SIGN_IN_WITH_GITHUB -> {
                     onGithubSignInClicked()
                 }
@@ -51,13 +58,36 @@ class MainActivity : AppCompatActivity() {
         githubUtils.authResultObserver.observe(this) {
             onGithubResponse(it)
         }
+
+        (viewModel as LoginViewModel).storeTokenObserver.observe(this) {
+            if (it) {
+                onSuccessfulSavingToken()
+            } else {
+                onFailedSavingToken()
+            }
+        }
+
+        (viewModel as LoginViewModel).fetchedUserObserver.observe(this) {
+            Log.e(javaClass.simpleName, "setObservers: $it", )
+        }
+    }
+
+    private fun onFailedSavingToken() {
+        Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun onSuccessfulSavingToken() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.fetchUserAccount()
+        }
     }
 
     private fun onGithubSignInClicked() {
-        if(NetworkUtils.hasInternetConnection(this))
+        if (NetworkUtils.hasInternetConnection(this))
             githubUtils.signInWithGithubProvider(this)
-        else{
-            Snackbar.make(binding.root, getString(R.string.internet_required), Snackbar.LENGTH_LONG).show()
+        else {
+            Snackbar.make(binding.root, getString(R.string.internet_required), Snackbar.LENGTH_LONG)
+                .show()
         }
     }
 
@@ -78,9 +108,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onSuccessfulGithubLogin(it: Task<AuthResult>) {
-        Log.e(
-            javaClass.simpleName,
-            "setObservers: ${((it.result.credential as OAuthCredential).accessToken)}"
-        )
+        val token = ((it.result.credential as OAuthCredential?)?.accessToken)
+        token?.let { safeToken ->
+            viewModel.storeToken(safeToken)
+        }
     }
 }
