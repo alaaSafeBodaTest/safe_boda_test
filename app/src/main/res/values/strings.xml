@@ -3,4 +3,9 @@
     <string name="type_your_email">Type your email . . .</string>
     <string name="sign_in_with_github">Sign-In with GitHub</string>
     <string name="logo">logo</string>
+    <string name="invalid_value">Invalid Value</string>
+    <string name="empty_field">Empty Field</string>
+    <string name="length_isnt_enough">Length is not enough</string>
+    <string name="wrong_value">Wrong Value</string>
+    <string name="internet_required">Internet Required</string>
 </resources>
