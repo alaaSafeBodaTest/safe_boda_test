@@ -1,9 +1,6 @@
 package com.example.safebodatest.core.db.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.safebodatest.core.db.tables.User
 
 @Dao
@@ -15,7 +12,7 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE id IN (:ids)")
     suspend fun loadAllByIds(ids: IntArray): List<User>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg users: User): List<Long>
 
     @Delete

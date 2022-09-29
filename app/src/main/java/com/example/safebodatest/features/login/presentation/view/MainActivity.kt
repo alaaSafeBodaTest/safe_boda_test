@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
+import com.example.safebodatest.core.db.AppDB
 import com.example.safebodatest.core.network_utils.NetworkUtils
 import com.example.safebodatest.core.preferences.PreferenceManager
 import com.example.safebodatest.core.utils.GithubUtils
@@ -35,12 +36,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var githubUtils: GithubUtils
 
     @Inject
-    lateinit var preferenceManager: PreferenceManager
+    lateinit var db: AppDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.viewModel = viewModel
+        lifecycleScope.launch(Dispatchers.IO) {
+            Log.e(javaClass.simpleName, "onCreate: ${db.userDao().getAll().toString()}", )
+        }
         setObservers()
     }
 
@@ -68,7 +72,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         (viewModel as LoginViewModel).fetchedUserObserver.observe(this) {
-            Log.e(javaClass.simpleName, "setObservers: $it", )
+            Log.e(javaClass.simpleName, "setObservers: $it")
+            it.fold(ifLeft = { f ->
+                Log.e(javaClass.simpleName, "setObservers: Failure: ${f?.message}.")
+            },
+                ifRight = { user ->
+                    lifecycleScope.launch(Dispatchers.IO){
+                        viewModel.storeUserDetails(user)
+                        viewModel.storeUserId(user.id)
+                    }
+                })
         }
     }
 

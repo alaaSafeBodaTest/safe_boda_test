@@ -1,0 +1,256 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "5d7c88a95ca2cd48f83a6bb972833822",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `avatar_url` TEXT NOT NULL, `bio` TEXT NOT NULL, `blog` TEXT NOT NULL, `collaborators` INTEGER NOT NULL, `company` TEXT NOT NULL, `created_at` TEXT NOT NULL, `disk_usage` INTEGER NOT NULL, `email` TEXT NOT NULL, `events_url` TEXT NOT NULL, `followers` INTEGER NOT NULL, `followers_url` TEXT NOT NULL, `following` INTEGER NOT NULL, `following_url` TEXT NOT NULL, `gists_url` TEXT NOT NULL, `gravatar_id` TEXT NOT NULL, `hireable` INTEGER NOT NULL, `html_url` TEXT NOT NULL, `location` TEXT NOT NULL, `login` TEXT NOT NULL, `name` TEXT NOT NULL, `node_id` TEXT NOT NULL, `organizations_url` TEXT NOT NULL, `owned_private_repos` INTEGER NOT NULL, `private_gists` INTEGER NOT NULL, `public_gists` INTEGER NOT NULL, `public_repos` INTEGER NOT NULL, `received_events_url` TEXT NOT NULL, `repos_url` TEXT NOT NULL, `site_admin` INTEGER NOT NULL, `starred_url` TEXT NOT NULL, `subscriptions_url` TEXT NOT NULL, `total_private_repos` INTEGER NOT NULL, `twitter_username` TEXT NOT NULL, `two_factor_authentication` INTEGER NOT NULL, `type` TEXT NOT NULL, `updated_at` TEXT NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "avatar_url",
+            "columnName": "avatar_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bio",
+            "columnName": "bio",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "blog",
+            "columnName": "blog",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "collaborators",
+            "columnName": "collaborators",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "company",
+            "columnName": "company",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "created_at",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "disk_usage",
+            "columnName": "disk_usage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "events_url",
+            "columnName": "events_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "followers",
+            "columnName": "followers",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "followers_url",
+            "columnName": "followers_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "following",
+            "columnName": "following",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "following_url",
+            "columnName": "following_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gists_url",
+            "columnName": "gists_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gravatar_id",
+            "columnName": "gravatar_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hireable",
+            "columnName": "hireable",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "html_url",
+            "columnName": "html_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "login",
+            "columnName": "login",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "node_id",
+            "columnName": "node_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "organizations_url",
+            "columnName": "organizations_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "owned_private_repos",
+            "columnName": "owned_private_repos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "private_gists",
+            "columnName": "private_gists",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "public_gists",
+            "columnName": "public_gists",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "public_repos",
+            "columnName": "public_repos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "received_events_url",
+            "columnName": "received_events_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repos_url",
+            "columnName": "repos_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "site_admin",
+            "columnName": "site_admin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "starred_url",
+            "columnName": "starred_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subscriptions_url",
+            "columnName": "subscriptions_url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total_private_repos",
+            "columnName": "total_private_repos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "twitter_username",
+            "columnName": "twitter_username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "two_factor_authentication",
+            "columnName": "two_factor_authentication",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updated_at",
+            "columnName": "updated_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5d7c88a95ca2cd48f83a6bb972833822')"
+    ]
+  }
+}

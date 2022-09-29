@@ -6,6 +6,6 @@ import com.example.safebodatest.core.failures.IFailure
 
 interface ILocalDatasource {
 
-    suspend fun saveUser(user: User): Either<IFailure, Boolean>
+    suspend fun saveUser(user: User): Either<IFailure, Long>
 
 }

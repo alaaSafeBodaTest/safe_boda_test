@@ -1,5 +1,6 @@
 package com.example.safebodatest.core.di.modules
 
+import com.example.safebodatest.features.login.data.datasource.local_datasources.DBLocalDatasource
 import com.example.safebodatest.features.login.data.datasource.local_datasources.ILocalDatasource
 import com.example.safebodatest.features.login.data.datasource.remote_datasources.IRemoteDatasource
 import com.example.safebodatest.features.login.data.datasource.remote_datasources.RemoteDatasourceImpl
@@ -14,7 +15,7 @@ abstract class DatasourceModule {
 
     @Binds
     abstract fun getLoginLocalDatasource(
-        datasource: ILocalDatasource
+        datasource: DBLocalDatasource
     ): ILocalDatasource
 
     @Binds

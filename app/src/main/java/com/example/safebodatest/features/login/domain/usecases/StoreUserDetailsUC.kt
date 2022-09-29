@@ -7,10 +7,9 @@ import com.example.safebodatest.core.usecase_templates.IUseCaseTemplate
 import com.example.safebodatest.features.login.domain.repositories.ILoginRepository
 import javax.inject.Inject
 
-class FetchUserUC @Inject constructor(private val repository: ILoginRepository)
-    : IUseCaseTemplate<IUseCaseTemplate.NoParams, User, IFailure> {
+class StoreUserDetailsUC @Inject constructor(private val repo: ILoginRepository) : IUseCaseTemplate<User, Long, IFailure> {
 
-    override suspend fun runAsync(params: IUseCaseTemplate.NoParams): Either<IFailure?, User> {
-        return repository.fetchUser()
+    override suspend fun runAsync(params: User): Either<IFailure?, Long> {
+        return repo.storeUserDetails(user = params)
     }
 }

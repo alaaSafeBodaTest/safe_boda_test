@@ -8,14 +8,17 @@ import com.example.safebodatest.core.failures.IFailure
 import java.lang.Exception
 import javax.inject.Inject
 
-class DBLocalDatasource : ILocalDatasource {
-    @Inject
-    lateinit var db: AppDB
+class DBLocalDatasource @Inject constructor(val db: AppDB) : ILocalDatasource {
 
-    override suspend fun saveUser(user: User): Either<IFailure, Boolean> {
+    override suspend fun saveUser(user: User): Either<IFailure, Long> {
         return try{
             val result = db.userDao().insertAll(user)
-            Either.Right(true)
+            println(db.userDao().getAll())
+            val id = result.firstOrNull()
+            if(id != null)
+                Either.Right(result.first())
+            else
+                Either.Left(CacheFailure(""))
         }catch (e: Exception){
             Either.Left(CacheFailure(e.localizedMessage ?:""))
         }
