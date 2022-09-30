@@ -16,6 +16,7 @@ import com.example.safebodatest.databinding.ActivitySplashBinding
 import com.example.safebodatest.features.login.presentation.view.SignInActivity
 import com.example.safebodatest.features.splash_screen.presentation.view_holder.ISplashViewModel
 import com.example.safebodatest.features.splash_screen.presentation.view_holder.SplashViewModel
+import com.example.safebodatest.features.users_list.presentation.view.UsersListActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -61,9 +62,17 @@ class SplashActivity : AppCompatActivity() {
                 }
             }, {
                 Log.e(javaClass.simpleName, "setObservers: User is Stored")
+                goToUsersListActivity()
             }
             )
         }
+    }
+
+    private fun goToUsersListActivity() {
+        val intent = Intent(this, UsersListActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
     }
 
     private fun onUserFetched(safeUser: User) {
@@ -98,7 +107,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToSignIn() {
         val intent = Intent(this, SignInActivity::class.java)
-        intent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
     }
 }

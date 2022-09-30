@@ -1,5 +1,6 @@
 package com.example.safebodatest.features.login.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.example.safebodatest.databinding.ActivitySignInBinding
 import com.example.safebodatest.features.login.presentation.actions.LoginActions
 import com.example.safebodatest.features.login.presentation.view_models.ILoginViewModel
 import com.example.safebodatest.features.login.presentation.view_models.LoginViewModel
+import com.example.safebodatest.features.users_list.presentation.view.UsersListActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
@@ -79,9 +81,17 @@ class SignInActivity : AppCompatActivity() {
                     lifecycleScope.launch(Dispatchers.IO){
                         viewModel.storeUserDetails(user)
                         viewModel.storeUserId(user.id)
+                        goToUsersListActivity()
                     }
                 })
         }
+    }
+
+    private fun goToUsersListActivity() {
+        val intent = Intent(this, UsersListActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
     }
 
     private fun onFailedSavingToken() {
