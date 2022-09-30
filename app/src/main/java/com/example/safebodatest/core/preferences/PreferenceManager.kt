@@ -36,7 +36,7 @@ class PreferenceManager @Inject constructor(private val context: Context) {
 
     fun getInt(key: String): Int? {
         return if (preferenceManager.contains(key))
-            preferenceManager.getInt(key, 0)
+            preferenceManager.getInt(key, -1)
         else
             null
     }

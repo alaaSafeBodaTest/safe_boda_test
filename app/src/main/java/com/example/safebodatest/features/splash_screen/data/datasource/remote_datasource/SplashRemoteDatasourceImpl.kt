@@ -1,4 +1,4 @@
-package com.example.safebodatest.features.login.data.datasource.remote_datasources
+package com.example.safebodatest.features.splash_screen.data.datasource.remote_datasource
 
 import arrow.core.Either
 import com.example.safebodatest.core.api.ServiceGenerator
@@ -6,11 +6,9 @@ import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.failures.RemoteFailure
 import javax.inject.Inject
-import kotlin.coroutines.suspendCoroutine
 
-class RemoteDatasourceImpl @Inject constructor() : IRemoteDatasource {
-
-    override suspend fun fetchUser(): Either<IFailure, User> {
+class SplashRemoteDatasourceImpl @Inject constructor() : ISplashRemoteDatasource {
+    override suspend fun getUser(): Either<IFailure, User> {
         return handleRequest {
             val response = ServiceGenerator.api.getUser()
             return@handleRequest if (response.isSuccessful) {
@@ -24,6 +22,4 @@ class RemoteDatasourceImpl @Inject constructor() : IRemoteDatasource {
             }
         }
     }
-
-
 }

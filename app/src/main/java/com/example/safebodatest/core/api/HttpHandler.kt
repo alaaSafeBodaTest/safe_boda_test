@@ -1,18 +1,12 @@
-package com.example.safebodatest.features.login.data.datasource.remote_datasources
+package com.example.safebodatest.core.api
 
 import arrow.core.Either
-import com.example.safebodatest.core.db.tables.User
-import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.failures.RemoteFailure
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import java.lang.Exception
 
-interface IRemoteDatasource {
-
-    suspend fun fetchUser(): Either<IFailure, User>
+interface HttpHandler {
 
     suspend fun <T> handleRequest(t: suspend () -> Either<RemoteFailure, T>): Either<RemoteFailure, T> {
         return try {

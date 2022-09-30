@@ -9,9 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
 import com.example.safebodatest.core.db.AppDB
 import com.example.safebodatest.core.network_utils.NetworkUtils
-import com.example.safebodatest.core.preferences.PreferenceManager
 import com.example.safebodatest.core.utils.GithubUtils
-import com.example.safebodatest.databinding.ActivityMainBinding
+import com.example.safebodatest.databinding.ActivitySignInBinding
 import com.example.safebodatest.features.login.presentation.actions.LoginActions
 import com.example.safebodatest.features.login.presentation.view_models.ILoginViewModel
 import com.example.safebodatest.features.login.presentation.view_models.LoginViewModel
@@ -25,9 +24,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivitySignInBinding
 
     @Inject
     lateinit var viewModel: ILoginViewModel
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         binding.viewModel = viewModel
         lifecycleScope.launch(Dispatchers.IO) {
             Log.e(javaClass.simpleName, "onCreate: ${db.userDao().getAll().toString()}", )

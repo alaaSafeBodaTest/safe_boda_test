@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/border_margin"
-        tools:context=".features.login.presentation.view.MainActivity">
+        tools:context=".features.login.presentation.view.SignInActivity">
 
         <ImageView
             android:layout_width="match_parent"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.safebodatest">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".core.di.AppCustomApplication"
@@ -17,13 +17,18 @@
         android:theme="@style/Theme.SafeBodaTest"
         tools:targetApi="31">
         <activity
-            android:name=".features.login.presentation.view.MainActivity"
+            android:name=".features.splash_screen.presentation.view.SplashActivity"
+            android:theme="@style/Theme.SafeBodaTest.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".features.login.presentation.view.SignInActivity"
+            android:exported="true">
         </activity>
     </application>
 

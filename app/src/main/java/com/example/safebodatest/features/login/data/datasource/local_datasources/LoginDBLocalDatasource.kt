@@ -8,7 +8,7 @@ import com.example.safebodatest.core.failures.IFailure
 import java.lang.Exception
 import javax.inject.Inject
 
-class DBLocalDatasource @Inject constructor(val db: AppDB) : ILocalDatasource {
+class LoginDBLocalDatasource @Inject constructor(val db: AppDB) : ILoginLocalDatasource {
 
     override suspend fun saveUser(user: User): Either<IFailure, Long> {
         return try{
