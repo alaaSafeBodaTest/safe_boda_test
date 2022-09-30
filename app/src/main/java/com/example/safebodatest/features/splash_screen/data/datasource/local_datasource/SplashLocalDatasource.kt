@@ -37,7 +37,6 @@ class SplashLocalDatasource @Inject constructor(
     override suspend fun saveUser(user: User): Either<IFailure, Long> {
         return try{
             val result = db.userDao().insertAll(user)
-            println(db.userDao().getAll())
             val id = result.firstOrNull()
             if(id != null)
                 Either.Right(result.first())
