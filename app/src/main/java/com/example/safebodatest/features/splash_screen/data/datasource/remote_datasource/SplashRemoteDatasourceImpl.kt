@@ -16,7 +16,7 @@ class SplashRemoteDatasourceImpl @Inject constructor() : ISplashRemoteDatasource
                 if (user != null)
                     Either.Right(user)
                 else
-                    Either.Left(RemoteFailure("", 200))
+                    Either.Left(RemoteFailure("No Body", 200))
             } else {
                 Either.Left(RemoteFailure(response.message(), response.code()))
             }

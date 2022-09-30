@@ -57,7 +57,7 @@ object ServiceGenerator {
     /**
      * Retrofit Instance
      * */
-    val api: APIs = Retrofit
+    var api: APIs = Retrofit
         .Builder()
         .baseUrl(URLs.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
