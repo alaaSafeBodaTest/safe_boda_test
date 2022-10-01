@@ -8,6 +8,8 @@ import com.example.safebodatest.features.splash_screen.data.datasource.local_dat
 import com.example.safebodatest.features.splash_screen.data.datasource.local_datasource.SplashLocalDatasource
 import com.example.safebodatest.features.splash_screen.data.datasource.remote_datasource.ISplashRemoteDatasource
 import com.example.safebodatest.features.splash_screen.data.datasource.remote_datasource.SplashRemoteDatasourceImpl
+import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.IUsersListRemoteDatasource
+import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.UsersListRemoteDatasourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,6 +18,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DatasourceModule {
+
+    @Binds
+    abstract fun getUsersListRemoteDatasource(
+        datasource: UsersListRemoteDatasourceImpl
+    ): IUsersListRemoteDatasource
 
     @Binds
     abstract fun getLoginLocalDatasource(

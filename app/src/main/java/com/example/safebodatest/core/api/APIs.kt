@@ -15,4 +15,7 @@ interface APIs {
     @GET(URLs.USER)
     suspend fun getUser(): Response<User>
 
+    @GET(URLs.FOLLOWERS)
+    suspend fun getFollowers(): Response<List<User>>
+
 }

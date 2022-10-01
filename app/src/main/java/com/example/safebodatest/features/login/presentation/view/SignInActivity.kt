@@ -89,9 +89,8 @@ class SignInActivity : AppCompatActivity() {
 
     private fun goToUsersListActivity() {
         val intent = Intent(this, UsersListActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
+        finish()
     }
 
     private fun onFailedSavingToken() {

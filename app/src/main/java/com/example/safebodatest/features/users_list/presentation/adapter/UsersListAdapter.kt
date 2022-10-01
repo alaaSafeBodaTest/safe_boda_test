@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.safebodatest.R
 import com.example.safebodatest.databinding.UsersListItemBinding
 import com.example.safebodatest.features.users_list.presentation.data_holder.UserListItem
+import javax.inject.Inject
 
-class UsersListAdapter : RecyclerView.Adapter<UsersListAdapter.UsersListViewHolder>() {
+class UsersListAdapter @Inject constructor() :
+    RecyclerView.Adapter<UsersListAdapter.UsersListViewHolder>() {
 
-    val list = mutableListOf<UserListItem>()
+    private val list = mutableListOf<UserListItem>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(usersList: List<UserListItem>) {
@@ -33,7 +36,12 @@ class UsersListAdapter : RecyclerView.Adapter<UsersListAdapter.UsersListViewHold
 
     override fun onBindViewHolder(holder: UsersListViewHolder, position: Int) {
         val item = list[position]
-        holder.binding.user = item
+        val binding = holder.binding
+        binding.user = item
+        Glide.with(binding.root.context)
+            .load(item.imgUrl)
+            .error(R.drawable.ic_baseline_account_circle_24)
+            .into(binding.image)
     }
 
     override fun getItemCount(): Int = list.size

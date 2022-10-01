@@ -107,8 +107,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToSignIn() {
         val intent = Intent(this, SignInActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         startActivity(intent)
+        finish()
     }
 }
