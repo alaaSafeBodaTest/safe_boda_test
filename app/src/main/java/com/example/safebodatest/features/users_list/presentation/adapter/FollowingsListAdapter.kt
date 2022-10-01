@@ -24,6 +24,12 @@ class FollowingsListAdapter @Inject constructor() :
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(usersList: List<FollowingListItem>) {
         list.addAll(usersList)
+        val map = HashMap<Int, FollowingListItem>()
+        list.forEach {
+            it.id?.let {id -> map[id] = it}
+        }
+        list.clear()
+        list.addAll(map.values)
         notifyDataSetChanged()
     }
 

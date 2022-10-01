@@ -6,6 +6,9 @@ import com.example.safebodatest.core.db.AppDB
 import com.example.safebodatest.core.db.dao.FollowingDao
 import com.example.safebodatest.core.db.dao.UserDao
 import com.example.safebodatest.core.preferences.PreferenceManager
+import com.example.safebodatest.features.users_list.data.datasource.local_datasource.IFollowingsListLocalDatasource
+import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.IFollowingsListRemoteDatasource
+import com.example.safebodatest.features.users_list.data.repository.FollowingsListRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +19,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    fun getFollowingsListRepository(
+        @ApplicationContext appContext: Context,
+        localDatasource: IFollowingsListLocalDatasource,
+        remoteDatasource: IFollowingsListRemoteDatasource
+    ) = FollowingsListRepositoryImpl(context = appContext, localDatasource = localDatasource, remoteDatasource = remoteDatasource)
 
     @Provides
     @Singleton

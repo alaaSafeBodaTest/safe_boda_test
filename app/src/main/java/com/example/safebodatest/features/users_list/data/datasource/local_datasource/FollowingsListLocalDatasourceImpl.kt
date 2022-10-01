@@ -35,4 +35,15 @@ class FollowingsListLocalDatasourceImpl @Inject constructor(val db: AppDB, val p
             Either.Left(CacheFailure(e.message ?: ""))
         }
     }
+
+    override suspend fun getFollowingsList(page: Int): Either<IFailure, List<FollowingListItemModel>> {
+        val adapter = FollowingModelTableAdapter()
+        val rows = db.followingDao().getAll()
+        return try {
+            val result = rows.map { adapter.toModel(it) }
+            return Either.Right(result)
+        }catch (e: Exception){
+            Either.Left(CacheFailure(e.message ?: ""))
+        }
+    }
 }
