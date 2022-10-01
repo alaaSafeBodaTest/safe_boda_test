@@ -89,7 +89,7 @@ class FollowingsListActivity : AppCompatActivity() {
 
     private fun onListUpdated(usersList: List<FollowingListItem>) {
         adapter.addAll(usersList)
-        if (adapter.itemCount > 0) {
+        if (usersList.isNotEmpty()) {
             (viewModel as FollowingsListViewModel).page++
             if (usersList.isNotEmpty())
                 lifecycleScope.launch(Dispatchers.IO) {

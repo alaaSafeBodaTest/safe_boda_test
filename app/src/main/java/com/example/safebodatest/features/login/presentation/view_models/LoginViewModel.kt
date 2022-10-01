@@ -47,7 +47,6 @@ class LoginViewModel @Inject constructor(
     }
 
     override suspend fun storeUserDetails(user: User) {
-        val result = storeUserDetailsUC.runAsync(user)
-        Log.e(javaClass.simpleName, "storeUserDetails: $result", )
+        storeUserDetailsUC.runAsync(user)
     }
 }

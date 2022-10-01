@@ -43,9 +43,6 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         binding.viewModel = viewModel
-        lifecycleScope.launch(Dispatchers.IO) {
-            Log.e(javaClass.simpleName, "onCreate: ${db.userDao().getAll().toString()}", )
-        }
         setObservers()
     }
 
@@ -73,7 +70,6 @@ class SignInActivity : AppCompatActivity() {
         }
 
         (viewModel as LoginViewModel).fetchedUserObserver.observe(this) {
-            Log.e(javaClass.simpleName, "setObservers: $it")
             it.fold(ifLeft = { f ->
                 Log.e(javaClass.simpleName, "setObservers: Failure: ${f?.message}.")
             },

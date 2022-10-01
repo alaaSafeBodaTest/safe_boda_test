@@ -61,7 +61,6 @@ class SplashActivity : AppCompatActivity() {
                     storeUserFailed(iFailure)
                 }
             }, {
-                Log.e(javaClass.simpleName, "setObservers: User is Stored")
                 goToUsersListActivity()
             }
             )
