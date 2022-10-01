@@ -5,11 +5,12 @@ import com.example.safebodatest.core.api.ServiceGenerator
 import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.failures.RemoteFailure
+import com.example.safebodatest.features.users_list.data.model.FollowingListItemModel
 import javax.inject.Inject
 
-class UsersListRemoteDatasourceImpl @Inject constructor(): IUsersListRemoteDatasource {
+class FollowingsListRemoteDatasourceImpl @Inject constructor(): IFollowingsListRemoteDatasource {
 
-    override suspend fun getUsersList(): Either<IFailure, List<User>> {
+    override suspend fun getFollowingsList(): Either<IFailure, List<FollowingListItemModel>> {
         return handleRequest {
             val response = ServiceGenerator.api.getFollowers()
             return@handleRequest if (response.isSuccessful) {

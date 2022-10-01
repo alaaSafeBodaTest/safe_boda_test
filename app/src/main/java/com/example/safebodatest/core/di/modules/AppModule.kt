@@ -3,6 +3,7 @@ package com.example.safebodatest.core.di.modules
 import android.content.Context
 import androidx.room.Room
 import com.example.safebodatest.core.db.AppDB
+import com.example.safebodatest.core.db.dao.FollowingDao
 import com.example.safebodatest.core.db.dao.UserDao
 import com.example.safebodatest.core.preferences.PreferenceManager
 import dagger.Module
@@ -29,6 +30,10 @@ class AppModule {
     @Provides
     @Singleton
     fun getUserDao(db: AppDB): UserDao = db.userDao()
+
+    @Provides
+    @Singleton
+    fun getFollowingDao(db: AppDB): FollowingDao = db.followingDao()
 
     @Provides
     @Singleton

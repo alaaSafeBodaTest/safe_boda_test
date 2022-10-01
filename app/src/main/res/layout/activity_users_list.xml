@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.users_list.presentation.view.UsersListActivity">
+        tools:context=".features.users_list.presentation.view.FollowingsListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/users_list"
@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/users_list_item" />
+            tools:listitem="@layout/following_list_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

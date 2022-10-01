@@ -17,7 +17,7 @@
         android:theme="@style/Theme.SafeBodaTest"
         tools:targetApi="31">
         <activity
-            android:name=".features.users_list.presentation.view.UsersListActivity"
+            android:name=".features.users_list.presentation.view.FollowingsListActivity"
             android:exported="false" />
         <activity
             android:name=".features.splash_screen.presentation.view.SplashActivity"

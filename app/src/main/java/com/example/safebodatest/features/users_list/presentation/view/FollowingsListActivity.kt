@@ -7,24 +7,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
 import com.example.safebodatest.databinding.ActivityUsersListBinding
-import com.example.safebodatest.features.users_list.presentation.adapter.UsersListAdapter
-import com.example.safebodatest.features.users_list.presentation.view_model.IUsersListViewModel
-import com.example.safebodatest.features.users_list.presentation.view_model.UsersListViewModel
+import com.example.safebodatest.features.users_list.presentation.adapter.FollowingsListAdapter
+import com.example.safebodatest.features.users_list.presentation.view_model.IFollowingsListViewModel
+import com.example.safebodatest.features.users_list.presentation.view_model.FollowingsListViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UsersListActivity : AppCompatActivity() {
+class FollowingsListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUsersListBinding
 
     @Inject
-    lateinit var viewModel: IUsersListViewModel
+    lateinit var viewModel: IFollowingsListViewModel
 
     @Inject
-    lateinit var adapter: UsersListAdapter
+    lateinit var adapter: FollowingsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class UsersListActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getUsersList()
+            viewModel.getFollowingsList()
         }
     }
 
@@ -45,9 +46,13 @@ class UsersListActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
-        (viewModel as UsersListViewModel).usersListObserver.observe(this) { usersList ->
-            adapter.setList(usersList)
-            checkEmptyScreen(usersList.size)
+        (viewModel as FollowingsListViewModel).followingsListObserver.observe(this) { result ->
+            result.fold(ifLeft = {
+                Snackbar.make(binding.root, "Failed to get followers because of: ${it?.message}",Snackbar.LENGTH_LONG).show()
+            }, ifRight = { usersList ->
+                adapter.setList(usersList)
+                checkEmptyScreen(usersList.size)
+            })
         }
     }
 

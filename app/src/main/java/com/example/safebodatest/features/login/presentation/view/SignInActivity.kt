@@ -15,7 +15,7 @@ import com.example.safebodatest.databinding.ActivitySignInBinding
 import com.example.safebodatest.features.login.presentation.actions.LoginActions
 import com.example.safebodatest.features.login.presentation.view_models.ILoginViewModel
 import com.example.safebodatest.features.login.presentation.view_models.LoginViewModel
-import com.example.safebodatest.features.users_list.presentation.view.UsersListActivity
+import com.example.safebodatest.features.users_list.presentation.view.FollowingsListActivity
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
@@ -88,7 +88,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun goToUsersListActivity() {
-        val intent = Intent(this, UsersListActivity::class.java)
+        val intent = Intent(this, FollowingsListActivity::class.java)
         startActivity(intent)
         finish()
     }

@@ -2,10 +2,12 @@ package com.example.safebodatest.core.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.safebodatest.core.db.dao.FollowingDao
 import com.example.safebodatest.core.db.dao.UserDao
+import com.example.safebodatest.core.db.tables.Following
 import com.example.safebodatest.core.db.tables.User
 
-@Database(entities = [User::class],
+@Database(entities = [User::class, Following::class],
     version = AppDB.DB_VERSION,
     autoMigrations = [],
 )
@@ -16,6 +18,7 @@ abstract class AppDB : RoomDatabase() {
     }
 
     abstract fun userDao(): UserDao
+    abstract fun followingDao(): FollowingDao
 
 
 }

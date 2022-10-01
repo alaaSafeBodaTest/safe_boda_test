@@ -7,34 +7,34 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.safebodatest.R
-import com.example.safebodatest.databinding.UsersListItemBinding
-import com.example.safebodatest.features.users_list.presentation.data_holder.UserListItem
+import com.example.safebodatest.databinding.FollowingListItemBinding
+import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
 import javax.inject.Inject
 
-class UsersListAdapter @Inject constructor() :
-    RecyclerView.Adapter<UsersListAdapter.UsersListViewHolder>() {
+class FollowingsListAdapter @Inject constructor() :
+    RecyclerView.Adapter<FollowingsListAdapter.FollowingsListViewHolder>() {
 
-    private val list = mutableListOf<UserListItem>()
+    private val list = mutableListOf<FollowingListItem>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(usersList: List<UserListItem>) {
+    fun setList(usersList: List<FollowingListItem>) {
         list.clear()
         list.addAll(usersList)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingsListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<UsersListItemBinding>(
+        val binding = DataBindingUtil.inflate<FollowingListItemBinding>(
             inflater,
-            R.layout.users_list_item,
+            R.layout.following_list_item,
             parent,
             false
         )
-        return UsersListViewHolder(binding)
+        return FollowingsListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: UsersListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FollowingsListViewHolder, position: Int) {
         val item = list[position]
         val binding = holder.binding
         binding.user = item
@@ -46,7 +46,7 @@ class UsersListAdapter @Inject constructor() :
 
     override fun getItemCount(): Int = list.size
 
-    inner class UsersListViewHolder(val binding: UsersListItemBinding) :
+    inner class FollowingsListViewHolder(val binding: FollowingListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 }

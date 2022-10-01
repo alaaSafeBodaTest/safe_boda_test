@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "169e0b9ef85f4127934d193f26c899b8",
+    "identityHash": "0a16f06313872c5991b6f28f43826977",
     "entities": [
       {
         "tableName": "User",
@@ -245,12 +245,134 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Following",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `avatar_url` TEXT, `events_url` TEXT, `followers_url` TEXT, `following_url` TEXT, `gists_url` TEXT, `gravatar_id` TEXT, `html_url` TEXT, `login` TEXT, `node_id` TEXT, `organizations_url` TEXT, `received_events_url` TEXT, `repos_url` TEXT, `site_admin` INTEGER, `starred_url` TEXT, `subscriptions_url` TEXT, `type` TEXT, `url` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "avatar_url",
+            "columnName": "avatar_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "events_url",
+            "columnName": "events_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "followers_url",
+            "columnName": "followers_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "following_url",
+            "columnName": "following_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gists_url",
+            "columnName": "gists_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gravatar_id",
+            "columnName": "gravatar_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "html_url",
+            "columnName": "html_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "login",
+            "columnName": "login",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "node_id",
+            "columnName": "node_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "organizations_url",
+            "columnName": "organizations_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "received_events_url",
+            "columnName": "received_events_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "repos_url",
+            "columnName": "repos_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "site_admin",
+            "columnName": "site_admin",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "starred_url",
+            "columnName": "starred_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "subscriptions_url",
+            "columnName": "subscriptions_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '169e0b9ef85f4127934d193f26c899b8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0a16f06313872c5991b6f28f43826977')"
     ]
   }
 }
