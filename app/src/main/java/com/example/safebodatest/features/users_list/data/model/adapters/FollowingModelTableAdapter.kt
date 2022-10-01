@@ -1,13 +1,12 @@
-package com.example.safebodatest.features.users_list.presentation.data_holder.adapter
+package com.example.safebodatest.features.users_list.data.model.adapters
 
+import com.example.safebodatest.core.db.tables.Following
 import com.example.safebodatest.core.model_templates.IDataModel
-import com.example.safebodatest.features.users_list.domain.entity.FollowingListItemEntity
-import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
+import com.example.safebodatest.features.users_list.data.model.FollowingListItemModel
 
-class FollowingListItemDataHolderEntityAdapter :
-    IDataModel<FollowingListItem, FollowingListItemEntity>() {
-    override fun toEntity(model: FollowingListItem): FollowingListItemEntity {
-        return FollowingListItemEntity(
+class FollowingModelTableAdapter: IDataModel<FollowingListItemModel, Following>() {
+    override fun toEntity(model: FollowingListItemModel): Following {
+        return Following(
             id = model.id,
             avatar_url = model.avatar_url,
             login = model.login,
@@ -29,8 +28,8 @@ class FollowingListItemDataHolderEntityAdapter :
         )
     }
 
-    override fun toModel(entity: FollowingListItemEntity): FollowingListItem {
-        return FollowingListItem(
+    override fun toModel(entity: Following): FollowingListItemModel {
+        return FollowingListItemModel(
             id = entity.id,
             avatar_url = entity.avatar_url,
             login = entity.login,

@@ -8,8 +8,10 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
+import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.databinding.ActivityUsersListBinding
 import com.example.safebodatest.features.users_list.presentation.adapter.FollowingsListAdapter
+import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
 import com.example.safebodatest.features.users_list.presentation.view_model.IFollowingsListViewModel
 import com.example.safebodatest.features.users_list.presentation.view_model.FollowingsListViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -51,7 +53,7 @@ class FollowingsListActivity : AppCompatActivity() {
     private fun setViews() {
         binding.usersList.adapter = adapter
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, scrollX, scrollY, oldScrollX, oldScrollY ->
+            binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, _, scrollY, _, _ ->
                 if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
                     fetchFollowers()
                 }
@@ -62,20 +64,40 @@ class FollowingsListActivity : AppCompatActivity() {
     private fun setObservers() {
         (viewModel as FollowingsListViewModel).followingsListObserver.observe(this) { result ->
             result.fold(ifLeft = {
-                Snackbar.make(
-                    binding.root,
-                    "Failed to get followers because of: ${it?.message}",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                onFailedRetrievingFollowings(it)
             }, ifRight = { usersList ->
-                adapter.addAll(usersList)
-                if (adapter.itemCount > 0)
-                    (viewModel as FollowingsListViewModel).page++
-                else
-                    (viewModel as FollowingsListViewModel).lastPageLoaded = true
-                checkEmptyScreen(adapter.itemCount)
+                onListUpdated(usersList)
             })
         }
+        (viewModel as FollowingsListViewModel).storeFollowingsListObserver.observe(this) { either ->
+            either.fold(ifLeft = {
+                onFailedRetrievingFollowings(it)
+            },
+                ifRight = {
+                    println(it)
+                })
+        }
+    }
+
+    private fun onFailedRetrievingFollowings(it: IFailure?) {
+        Snackbar.make(
+            binding.root,
+            "Failed to get followers because of: ${it?.message}",
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+    private fun onListUpdated(usersList: List<FollowingListItem>) {
+        adapter.addAll(usersList)
+        if (adapter.itemCount > 0) {
+            (viewModel as FollowingsListViewModel).page++
+            if (usersList.isNotEmpty())
+                lifecycleScope.launch(Dispatchers.IO) {
+                    viewModel.storeFollowingsList(usersList)
+                }
+        } else
+            (viewModel as FollowingsListViewModel).lastPageLoaded = true
+        checkEmptyScreen(adapter.itemCount)
     }
 
     private fun checkEmptyScreen(listSize: Int) {

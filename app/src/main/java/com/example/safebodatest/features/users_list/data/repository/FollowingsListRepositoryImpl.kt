@@ -3,13 +3,17 @@ package com.example.safebodatest.features.users_list.data.repository
 import arrow.core.Either
 import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.core.failures.IFailure
+import com.example.safebodatest.features.users_list.data.datasource.local_datasource.IFollowingsListLocalDatasource
 import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.IFollowingsListRemoteDatasource
 import com.example.safebodatest.features.users_list.data.model.adapters.FollowingEntityModelAdapter
 import com.example.safebodatest.features.users_list.domain.entity.FollowingListItemEntity
 import com.example.safebodatest.features.users_list.domain.repository.IFollowingsListRepository
 import javax.inject.Inject
 
-class FollowingsListRepositoryImpl @Inject constructor(private val remoteDatasource: IFollowingsListRemoteDatasource) :
+class FollowingsListRepositoryImpl @Inject constructor(
+    private val remoteDatasource: IFollowingsListRemoteDatasource,
+    private val localDatasource: IFollowingsListLocalDatasource,
+) :
     IFollowingsListRepository {
 
     override suspend fun getFollowingsList(page: Int): Either<IFailure, List<FollowingListItemEntity>> {
@@ -25,5 +29,11 @@ class FollowingsListRepositoryImpl @Inject constructor(private val remoteDatasou
         } else {
             return result
         }
+    }
+
+    override suspend fun storeFollowingsList(list: List<FollowingListItemEntity>): Either<IFailure, List<Long>> {
+        val adapter = FollowingEntityModelAdapter()
+        val modelList = list.map { adapter.toModel(it) }
+        return localDatasource.storeFollowingsListLocally(modelList)
     }
 }

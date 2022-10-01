@@ -43,7 +43,7 @@ class FollowingsListAdapter @Inject constructor() :
         val binding = holder.binding
         binding.user = item
         Glide.with(binding.root.context)
-            .load(item.imgUrl)
+            .load(item.avatar_url)
             .placeholder(R.drawable.ic_baseline_account_circle_24)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding.image)

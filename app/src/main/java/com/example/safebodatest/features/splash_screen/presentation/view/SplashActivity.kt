@@ -98,7 +98,7 @@ class SplashActivity : AppCompatActivity() {
             Log.e(javaClass.simpleName, "handleToken: ${it?.message}")
             goToSignIn()
         },
-            ifRight = { token ->
+            ifRight = {
                 lifecycleScope.launch(Dispatchers.IO) {
                     viewModel.fetchUser(NetworkUtils.hasInternetConnection(this@SplashActivity))
                 }

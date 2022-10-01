@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/border_margin"
             android:fontFamily="sans-serif-black"
-            android:text="@{user.username}"
+            android:text="@{user.login}"
             app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="@id/image"
             tools:text="name" />
