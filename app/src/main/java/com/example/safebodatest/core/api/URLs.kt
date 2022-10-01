@@ -9,6 +9,6 @@ object URLs {
 
     const val USER = "/user"
 
-    const val FOLLOWERS = "/user/followers"
+    const val FOLLOWINGS = "/user/following"
 
 }
