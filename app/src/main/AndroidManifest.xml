@@ -24,6 +24,7 @@
         <activity
             android:name=".features.splash_screen.presentation.view.SplashActivity"
             android:exported="true"
+            android:noHistory="true"
             android:theme="@style/Theme.SafeBodaTest.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,8 @@
         </activity>
         <activity
             android:name=".features.login.presentation.view.SignInActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.SafeBodaTest.SignIn"/>
     </application>
 
 </manifest>

@@ -7,5 +7,6 @@ import com.example.safebodatest.features.users_list.data.model.FollowingListItem
 interface IFollowingsListLocalDatasource {
 
     suspend fun storeFollowingsListLocally(list: List<FollowingListItemModel>): Either<IFailure, List<Long>>
+    fun logout(): Either<IFailure, Any>
 
 }

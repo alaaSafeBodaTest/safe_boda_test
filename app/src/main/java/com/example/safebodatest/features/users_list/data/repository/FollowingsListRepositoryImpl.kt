@@ -1,7 +1,6 @@
 package com.example.safebodatest.features.users_list.data.repository
 
 import arrow.core.Either
-import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.features.users_list.data.datasource.local_datasource.IFollowingsListLocalDatasource
 import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.IFollowingsListRemoteDatasource
@@ -35,5 +34,9 @@ class FollowingsListRepositoryImpl @Inject constructor(
         val adapter = FollowingEntityModelAdapter()
         val modelList = list.map { adapter.toModel(it) }
         return localDatasource.storeFollowingsListLocally(modelList)
+    }
+
+    override fun logout(): Either<IFailure, Any> {
+        return localDatasource.logout()
     }
 }

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import arrow.core.Either
 import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.usecase_templates.IUseCaseTemplate
-import com.example.safebodatest.features.users_list.domain.entity.FollowingListItemEntity
 import com.example.safebodatest.features.users_list.domain.usecase.GetFollowingsListUC
+import com.example.safebodatest.features.users_list.domain.usecase.LogOutUC
 import com.example.safebodatest.features.users_list.domain.usecase.StoreFollowingsListUC
 import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
 import javax.inject.Inject
@@ -14,6 +14,7 @@ import javax.inject.Inject
 class FollowingsListViewModel @Inject constructor(
     private val getFollowingsList: GetFollowingsListUC,
     private val storeFollowingsListUC: StoreFollowingsListUC,
+    private val logOutUC: LogOutUC,
 ) : ViewModel(), IFollowingsListViewModel {
 
     val followingsListObserver = MutableLiveData<Either<IFailure?, List<FollowingListItem>>>()
@@ -31,5 +32,7 @@ class FollowingsListViewModel @Inject constructor(
         storeFollowingsListObserver.postValue(storeFollowingsListUC.runAsync(list))
     }
 
-
+    override fun logout(): Either<IFailure?, Any> {
+        return logOutUC.run(IUseCaseTemplate.NoParams())
+    }
 }

@@ -10,5 +10,6 @@ interface IFollowingsListRepository {
     suspend fun getFollowingsList(page: Int = 1) : Either<IFailure, List<FollowingListItemEntity>>
 
     suspend fun storeFollowingsList(list: List<FollowingListItemEntity>): Either<IFailure, List<Long>>
+    fun logout(): Either<IFailure, Any>
 
 }
