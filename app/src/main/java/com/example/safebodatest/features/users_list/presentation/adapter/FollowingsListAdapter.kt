@@ -40,6 +40,7 @@ class FollowingsListAdapter @Inject constructor() :
         binding.user = item
         Glide.with(binding.root.context)
             .load(item.imgUrl)
+            .placeholder(R.drawable.ic_baseline_account_circle_24)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding.image)
     }
