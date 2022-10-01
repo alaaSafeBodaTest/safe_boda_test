@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 class PreferenceManager @Inject constructor(context: Context) {
 
+    private val preferenceManager: SharedPreferences = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
 
     private fun applyEdit(m: (SharedPreferences.Editor) -> Unit) {
         val editor = preferenceManager.edit()
@@ -91,48 +92,5 @@ class PreferenceManager @Inject constructor(context: Context) {
         }
     }
 
-    init {
-        preferenceManager = context.getSharedPreferences(BuildConfig.APPLICATION_ID,
-            Context.MODE_PRIVATE
-        )
-    }
-    companion object {
-
-        //region  Variables
-
-        private lateinit var preferenceManager: SharedPreferences
-        /*
-
-     Without volatile the code doesn't work correctly with multiple threads.
-      The volatile prevents memory writes from being re-ordered,
-       making it impossible for other threads to read uninitialized fields of your singleton through
-       the singleton's pointer.
-    */
-
-        @Volatile
-        private var instance: PreferenceManager? = null
-
-        //endregion
-
-        // region Setter & Getter
-
-        @Synchronized
-        fun getInstance(context: Context): PreferenceManager {
-            val checkInstance = instance
-            if (checkInstance != null) {
-                return checkInstance
-            }
-            return synchronized(this) {
-                val checkInstanceAgain = instance
-                if (checkInstanceAgain != null) {
-                    checkInstanceAgain
-                } else {
-                    val created = PreferenceManager(context)
-                    instance = created
-                    created
-                }
-            }
-        }
-    }
 
 }
