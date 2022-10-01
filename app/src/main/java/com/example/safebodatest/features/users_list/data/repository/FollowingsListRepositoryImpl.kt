@@ -12,8 +12,8 @@ import javax.inject.Inject
 class FollowingsListRepositoryImpl @Inject constructor(private val remoteDatasource: IFollowingsListRemoteDatasource) :
     IFollowingsListRepository {
 
-    override suspend fun getFollowingsList(): Either<IFailure, List<FollowingListItemEntity>> {
-        val result = remoteDatasource.getFollowingsList()
+    override suspend fun getFollowingsList(page: Int): Either<IFailure, List<FollowingListItemEntity>> {
+        val result = remoteDatasource.getFollowingsList(page)
         if (result.isRight()) {
             result.orNull().let { list ->
                 val resultList = mutableListOf<FollowingListItemEntity>()

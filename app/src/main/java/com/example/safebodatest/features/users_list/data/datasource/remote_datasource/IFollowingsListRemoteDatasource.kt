@@ -8,6 +8,6 @@ import com.example.safebodatest.features.users_list.data.model.FollowingListItem
 
 interface IFollowingsListRemoteDatasource: HttpHandler {
 
-    suspend fun getFollowingsList() : Either<IFailure, List<FollowingListItemModel>>
+    suspend fun getFollowingsList(page: Int = 1) : Either<IFailure, List<FollowingListItemModel>>
 
 }

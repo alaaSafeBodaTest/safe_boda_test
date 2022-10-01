@@ -16,9 +16,13 @@ class FollowingsListAdapter @Inject constructor() :
 
     private val list = mutableListOf<FollowingListItem>()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setList(usersList: List<FollowingListItem>) {
         list.clear()
+        addAll(usersList)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addAll(usersList: List<FollowingListItem>) {
         list.addAll(usersList)
         notifyDataSetChanged()
     }

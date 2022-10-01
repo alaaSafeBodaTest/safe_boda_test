@@ -11,10 +11,10 @@ import com.example.safebodatest.features.users_list.presentation.data_holder.ada
 import javax.inject.Inject
 
 class GetFollowingsListUC @Inject constructor(val repository: IFollowingsListRepository) :
-    IUseCaseTemplate<IUseCaseTemplate.NoParams, List<FollowingListItem>, IFailure> {
+    IUseCaseTemplate<Int, List<FollowingListItem>, IFailure> {
 
-    override suspend fun runAsync(params: IUseCaseTemplate.NoParams): Either<IFailure?, List<FollowingListItem>> {
-        val result = repository.getFollowingsList()
+    override suspend fun runAsync(params: Int): Either<IFailure?, List<FollowingListItem>> {
+        val result = repository.getFollowingsList(params)
         return result.fold<Either<IFailure?, List<FollowingListItem>>>(ifLeft = {
             return Either.Left(it)
         }, ifRight = { list ->

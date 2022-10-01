@@ -16,8 +16,12 @@ class FollowingsListViewModel @Inject constructor(
 
     val followingsListObserver = MutableLiveData<Either<IFailure?, List<FollowingListItem>>>()
 
+    var page = 0
+
+    var lastPageLoaded = false
+
     override suspend fun getFollowingsList() {
-        followingsListObserver.postValue(getFollowingsList.runAsync(IUseCaseTemplate.NoParams()))
+        followingsListObserver.postValue(getFollowingsList.runAsync(page + 1))
 
     }
 

@@ -7,6 +7,6 @@ import com.example.safebodatest.features.users_list.domain.entity.FollowingListI
 
 interface IFollowingsListRepository {
 
-    suspend fun getFollowingsList() : Either<IFailure, List<FollowingListItemEntity>>
+    suspend fun getFollowingsList(page: Int = 1) : Either<IFailure, List<FollowingListItemEntity>>
 
 }

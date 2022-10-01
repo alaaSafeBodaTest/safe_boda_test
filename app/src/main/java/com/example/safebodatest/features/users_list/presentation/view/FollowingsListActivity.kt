@@ -1,8 +1,10 @@
 package com.example.safebodatest.features.users_list.presentation.view
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
@@ -36,22 +38,42 @@ class FollowingsListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getFollowingsList()
-        }
+        fetchFollowers()
+    }
+
+    private fun fetchFollowers() {
+        if (!(viewModel as FollowingsListViewModel).lastPageLoaded)
+            lifecycleScope.launch(Dispatchers.IO) {
+                viewModel.getFollowingsList()
+            }
     }
 
     private fun setViews() {
         binding.usersList.adapter = adapter
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                    fetchFollowers()
+                }
+            }
+        }
     }
 
     private fun setObservers() {
         (viewModel as FollowingsListViewModel).followingsListObserver.observe(this) { result ->
             result.fold(ifLeft = {
-                Snackbar.make(binding.root, "Failed to get followers because of: ${it?.message}",Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    binding.root,
+                    "Failed to get followers because of: ${it?.message}",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }, ifRight = { usersList ->
-                adapter.setList(usersList)
-                checkEmptyScreen(usersList.size)
+                adapter.addAll(usersList)
+                if (adapter.itemCount > 0)
+                    (viewModel as FollowingsListViewModel).page++
+                else
+                    (viewModel as FollowingsListViewModel).lastPageLoaded = true
+                checkEmptyScreen(adapter.itemCount)
             })
         }
     }

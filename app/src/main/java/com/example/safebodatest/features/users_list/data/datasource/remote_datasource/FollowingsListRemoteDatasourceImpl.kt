@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class FollowingsListRemoteDatasourceImpl @Inject constructor(): IFollowingsListRemoteDatasource {
 
-    override suspend fun getFollowingsList(): Either<IFailure, List<FollowingListItemModel>> {
+    override suspend fun getFollowingsList(page: Int): Either<IFailure, List<FollowingListItemModel>> {
         return handleRequest {
-            val response = ServiceGenerator.api.getFollowers()
+            val response = ServiceGenerator.api.getFollowers(page = page)
             return@handleRequest if (response.isSuccessful) {
                 val followers = response.body()
                 if (followers != null)
