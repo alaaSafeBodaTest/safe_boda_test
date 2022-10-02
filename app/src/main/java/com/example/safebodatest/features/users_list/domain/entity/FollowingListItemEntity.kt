@@ -1,7 +1,7 @@
 package com.example.safebodatest.features.users_list.domain.entity
 
 open class FollowingListItemEntity(
-    val id: Int? = null,
+    val id: Int,
     val avatar_url: String? = null,
     val events_url: String? = null,
     val followers_url: String? = null,

@@ -7,6 +7,7 @@ import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.preferences.PreferenceManager
 import com.example.safebodatest.features.users_list.data.model.FollowingListItemModel
 import com.example.safebodatest.features.users_list.data.model.adapters.FollowingModelTableAdapter
+import com.example.safebodatest.features.users_list.data.model.adapters.FollowingUserAdapter
 import javax.inject.Inject
 
 class FollowingsListLocalDatasourceImpl @Inject constructor(val db: AppDB, val preferenceManager: PreferenceManager) :
@@ -15,12 +16,16 @@ class FollowingsListLocalDatasourceImpl @Inject constructor(val db: AppDB, val p
     override suspend fun storeFollowingsListLocally(list: List<FollowingListItemModel>): Either<IFailure, List<Long>> {
         val adapter = FollowingModelTableAdapter()
         val rows = list.map { adapter.toEntity(it) }
+        val followingUserAdapter = FollowingUserAdapter()
+        val usersRows = rows.map { followingUserAdapter.toModel(it) }.toMutableList()
         return try {
-            val ids = db.followingDao().insertAll(*rows.toTypedArray())
+            val ids = db.followingDao().insertAll(*rows.toTypedArray()).map { it.toInt() }
+            usersRows.removeAll { ids.contains(it.id) }
+            db.userDao().insertAll(*usersRows.toTypedArray())
             if(ids.isEmpty())
                 Either.Left(CacheFailure(""))
             else
-                Either.Right(ids)
+                Either.Right(ids.map { it.toLong() })
         }catch (e: Exception){
             Either.Left(CacheFailure(e.message ?: ""))
         }

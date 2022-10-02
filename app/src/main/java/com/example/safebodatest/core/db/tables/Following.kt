@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Following")
 data class Following(
     @PrimaryKey
-    val id: Int? = null,
+    val id: Int,
     val avatar_url: String? = null,
     val events_url: String? = null,
     val followers_url: String? = null,

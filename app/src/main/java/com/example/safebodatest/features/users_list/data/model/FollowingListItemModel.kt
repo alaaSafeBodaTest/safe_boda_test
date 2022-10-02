@@ -3,7 +3,7 @@ package com.example.safebodatest.features.users_list.data.model
 import com.example.safebodatest.features.users_list.domain.entity.FollowingListItemEntity
 
 class FollowingListItemModel(
-    id: Int? = null,
+    id: Int,
     avatar_url: String? = null,
     events_url: String? = null,
     followers_url: String? = null,

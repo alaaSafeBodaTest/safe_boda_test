@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0a16f06313872c5991b6f28f43826977",
+    "identityHash": "bbc16d4e22cad494e809fb3da64c27f2",
     "entities": [
       {
         "tableName": "User",
@@ -248,13 +248,13 @@
       },
       {
         "tableName": "Following",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `avatar_url` TEXT, `events_url` TEXT, `followers_url` TEXT, `following_url` TEXT, `gists_url` TEXT, `gravatar_id` TEXT, `html_url` TEXT, `login` TEXT, `node_id` TEXT, `organizations_url` TEXT, `received_events_url` TEXT, `repos_url` TEXT, `site_admin` INTEGER, `starred_url` TEXT, `subscriptions_url` TEXT, `type` TEXT, `url` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `avatar_url` TEXT, `events_url` TEXT, `followers_url` TEXT, `following_url` TEXT, `gists_url` TEXT, `gravatar_id` TEXT, `html_url` TEXT, `login` TEXT, `node_id` TEXT, `organizations_url` TEXT, `received_events_url` TEXT, `repos_url` TEXT, `site_admin` INTEGER, `starred_url` TEXT, `subscriptions_url` TEXT, `type` TEXT, `url` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "avatar_url",
@@ -372,7 +372,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0a16f06313872c5991b6f28f43826977')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bbc16d4e22cad494e809fb3da64c27f2')"
     ]
   }
 }
