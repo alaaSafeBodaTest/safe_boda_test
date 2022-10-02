@@ -2,6 +2,8 @@ package com.example.safebodatest.core.di.modules
 
 import com.example.safebodatest.features.login.data.repositories.LoginRepoImpl
 import com.example.safebodatest.features.login.domain.repositories.ILoginRepository
+import com.example.safebodatest.features.search_user.data.repository.SearchUserRepositoryImpl
+import com.example.safebodatest.features.search_user.domain.repository.ISearchUserRepository
 import com.example.safebodatest.features.splash_screen.data.repository.SplashRepositoryImpl
 import com.example.safebodatest.features.splash_screen.domain.repository.ISplashRepository
 import com.example.safebodatest.features.user_details.data.repository.UserDetailsRepositoryImpl
@@ -16,6 +18,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    abstract fun getSearchRepository(
+        repoImpl: SearchUserRepositoryImpl
+    ): ISearchUserRepository
 
     @Binds
     abstract fun getUserDetailsRepository(

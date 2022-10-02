@@ -4,6 +4,8 @@ import com.example.safebodatest.features.login.data.datasource.local_datasources
 import com.example.safebodatest.features.login.data.datasource.local_datasources.LoginDBLocalDatasource
 import com.example.safebodatest.features.login.data.datasource.remote_datasources.ILoginRemoteDatasource
 import com.example.safebodatest.features.login.data.datasource.remote_datasources.LoginRemoteDatasourceImpl
+import com.example.safebodatest.features.search_user.data.datasource.local_datasource.ISearchUserLocalDatasource
+import com.example.safebodatest.features.search_user.data.datasource.local_datasource.SearchUserLocalDatasourceImpl
 import com.example.safebodatest.features.splash_screen.data.datasource.local_datasource.ISplashLocalDatasource
 import com.example.safebodatest.features.splash_screen.data.datasource.local_datasource.SplashLocalDatasource
 import com.example.safebodatest.features.splash_screen.data.datasource.remote_datasource.ISplashRemoteDatasource
@@ -24,6 +26,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DatasourceModule {
+
+    @Binds
+    abstract fun getSearchUserLocalDatasource(
+        datasource: SearchUserLocalDatasourceImpl
+    ): ISearchUserLocalDatasource
 
     @Binds
     abstract fun getUserDetailsRemoteDatasource(

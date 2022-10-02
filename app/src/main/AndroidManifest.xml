@@ -17,9 +17,12 @@
         android:theme="@style/Theme.SafeBodaTest"
         tools:targetApi="31">
         <activity
+            android:name=".features.search_user.presentation.view.SearchUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.user_details.presentation.view.UserDetailsActivity"
             android:exported="false"
-            android:label="User Details"/>
+            android:label="User Details" />
         <activity
             android:name=".features.users_list.presentation.view.FollowingsListActivity"
             android:exported="false"

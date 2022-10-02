@@ -16,6 +16,7 @@ import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.user_utils.UserManager
 import com.example.safebodatest.databinding.ActivityUsersListBinding
 import com.example.safebodatest.features.login.presentation.view.SignInActivity
+import com.example.safebodatest.features.search_user.presentation.view.SearchUserActivity
 import com.example.safebodatest.features.user_details.presentation.view.UserDetailsActivity
 import com.example.safebodatest.features.users_list.presentation.adapter.FollowingsListAdapter
 import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
@@ -58,6 +59,9 @@ class FollowingsListActivity : AppCompatActivity() {
     }
 
     private fun setViews() {
+        binding.searchFab.setOnClickListener {
+            goToSearchUser()
+        }
         adapter.listener = {
             it.login?.let { username -> goToUserDetails(username) }
         }
@@ -87,6 +91,11 @@ class FollowingsListActivity : AppCompatActivity() {
                     println(it)
                 })
         }
+    }
+
+    private fun goToSearchUser() {
+        val intent = Intent(this, SearchUserActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToUserDetails(username: String) {

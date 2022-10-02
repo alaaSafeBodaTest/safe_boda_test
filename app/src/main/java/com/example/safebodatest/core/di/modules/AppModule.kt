@@ -7,6 +7,9 @@ import com.example.safebodatest.core.db.dao.FollowRelationDao
 import com.example.safebodatest.core.db.dao.FollowingDao
 import com.example.safebodatest.core.db.dao.UserDao
 import com.example.safebodatest.core.preferences.PreferenceManager
+import com.example.safebodatest.features.search_user.data.datasource.local_datasource.SearchUserLocalDatasourceImpl
+import com.example.safebodatest.features.search_user.data.datasource.remote_datasource.SearchUserRemoteDatasourceImpl
+import com.example.safebodatest.features.search_user.data.repository.SearchUserRepositoryImpl
 import com.example.safebodatest.features.user_details.data.datasource.local_datasource.UserDetailsLocalDatasourceImpl
 import com.example.safebodatest.features.user_details.data.datasource.remote_datasource.UserDetailsRemoteDatasourceImpl
 import com.example.safebodatest.features.user_details.data.repository.UserDetailsRepositoryImpl
@@ -23,6 +26,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    fun getSearchUserRepository(
+        @ApplicationContext appContext: Context,
+        localDatasource: SearchUserLocalDatasourceImpl,
+        remoteDatasource: SearchUserRemoteDatasourceImpl
+    ) = SearchUserRepositoryImpl(context = appContext, localDatasource = localDatasource, remoteDatasource = remoteDatasource)
 
     @Provides
     fun getUserDetailsRepository(

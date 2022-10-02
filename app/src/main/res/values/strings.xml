@@ -16,4 +16,7 @@
     <string name="followings">Followings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_for_user_name">search for user name</string>
+    <string name="img">img</string>
+    <string name="field_required">This field is required</string>
 </resources>

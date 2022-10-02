@@ -2,6 +2,8 @@ package com.example.safebodatest.core.di.modules
 
 import com.example.safebodatest.features.login.presentation.view_models.ILoginViewModel
 import com.example.safebodatest.features.login.presentation.view_models.LoginViewModel
+import com.example.safebodatest.features.search_user.presentation.view_model.ISearchUserViewModel
+import com.example.safebodatest.features.search_user.presentation.view_model.SearchUserViewModelImpl
 import com.example.safebodatest.features.splash_screen.presentation.view_holder.ISplashViewModel
 import com.example.safebodatest.features.splash_screen.presentation.view_holder.SplashViewModel
 import com.example.safebodatest.features.user_details.presentation.viewModel.IUserDetailsViewModel
@@ -18,6 +20,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class ViewModelModules {
+
+    @Binds
+    abstract fun getSearchUserViewModel(
+        viewModel: SearchUserViewModelImpl
+    ): ISearchUserViewModel
 
     @Binds
     abstract fun getUserFollowViewModel(
