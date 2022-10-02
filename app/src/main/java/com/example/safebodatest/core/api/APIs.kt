@@ -19,9 +19,26 @@ interface APIs {
     suspend fun getUser(): Response<User>
 
     @GET(URLs.FOLLOWINGS)
-    suspend fun getFollowers(@Query("page") page: Int = 1,@Query("per_page") per_page: Int = 8): Response<List<FollowingListItemModel>>
+    suspend fun getFollowers(
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 8
+    ): Response<List<FollowingListItemModel>>
 
     @GET(URLs.USER_BY_USERNAME)
     suspend fun getUserByUsername(@Path("username") username: String): Response<User>
+
+    @GET(URLs.USER_FOLLOWERS)
+    suspend fun getUserFollowers(
+        @Path("username") username: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 8
+    ): Response<List<User>>
+
+    @GET(URLs.USER_FOLLOWINGS)
+    suspend fun getUserFollowings(
+        @Path("username") username: String,
+        @Query("page") page: Int = 1,
+        @Query("per_page") per_page: Int = 8
+    ): Response<List<User>>
 
 }

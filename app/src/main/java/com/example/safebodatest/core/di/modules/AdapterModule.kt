@@ -1,5 +1,6 @@
 package com.example.safebodatest.core.di.modules
 
+import com.example.safebodatest.features.user_details.presentation.adapters.UserFollowListAdapter
 import com.example.safebodatest.features.users_list.presentation.adapter.FollowingsListAdapter
 import dagger.Module
 import dagger.Provides
@@ -11,6 +12,9 @@ import dagger.hilt.components.SingletonComponent
 class AdapterModule {
 
     @Provides
-    fun getUsersAdapter() = FollowingsListAdapter()
+    fun getFollowingsAdapter() = FollowingsListAdapter()
+
+    @Provides
+    fun getUsersAdapter() = UserFollowListAdapter()
 
 }

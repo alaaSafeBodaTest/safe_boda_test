@@ -21,13 +21,13 @@ class UserDetailsRepositoryImpl @Inject constructor(
     override suspend fun loadUserByUsernameUC(username: String): Either<IFailure, User> {
         val isOnline = NetworkUtils.hasInternetConnection(context)
         return if (isOnline) {
-            onOnlineMode(username)
+            loadUserOnOnlineMode(username)
         } else {
-            onOfflineMode(username)
+            loadUserOnOfflineMode(username)
         }
     }
 
-    private suspend fun onOnlineMode(username: String): Either<IFailure, User> {
+    private suspend fun loadUserOnOnlineMode(username: String): Either<IFailure, User> {
         val result = remoteDatasource.loadUserByUsername(username)
         result.orNull()?.let { user ->
             localDatasource.storeUser(user)
@@ -35,10 +35,20 @@ class UserDetailsRepositoryImpl @Inject constructor(
         return result
     }
 
-    private suspend fun onOfflineMode(username: String): Either<IFailure, User>  {
-        withContext(Dispatchers.Main){
+    private suspend fun loadUserOnOfflineMode(username: String): Either<IFailure, User> {
+        withContext(Dispatchers.Main) {
             Toast.makeText(context, "You are offline", Toast.LENGTH_LONG).show()
         }
         return localDatasource.loadUserByUsername(username)
+    }
+
+    override suspend fun loadUserFollowingsByUsername(params: String): Either<IFailure, List<User>> {
+        val result = remoteDatasource.loadUserFollowingsByUsername(params)
+        return result
+    }
+
+    override suspend fun loadUserFollowersByUsername(params: String): Either<IFailure, List<User>> {
+        val result = remoteDatasource.loadUserFollowersByUsername(params)
+        return result
     }
 }

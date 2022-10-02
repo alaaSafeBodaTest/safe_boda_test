@@ -23,4 +23,34 @@ class UserDetailsRemoteDatasourceImpl @Inject constructor() : IUserDetailsRemote
             }
         }
     }
+
+    override suspend fun loadUserFollowingsByUsername(username: String): Either<IFailure, List<User>> {
+        return handleRequest {
+            val response = ServiceGenerator.api.getUserFollowings(username)
+            return@handleRequest if (response.isSuccessful) {
+                val user = response.body()
+                if (user != null)
+                    Either.Right(user)
+                else
+                    Either.Left(RemoteFailure("Unknown Failure", 200))
+            } else {
+                Either.Left(RemoteFailure(response.message(), response.code()))
+            }
+        }
+    }
+
+    override suspend fun loadUserFollowersByUsername(username: String): Either<IFailure, List<User>> {
+        return handleRequest {
+            val response = ServiceGenerator.api.getUserFollowers(username)
+            return@handleRequest if (response.isSuccessful) {
+                val user = response.body()
+                if (user != null)
+                    Either.Right(user)
+                else
+                    Either.Left(RemoteFailure("Unknown Failure", 200))
+            } else {
+                Either.Left(RemoteFailure(response.message(), response.code()))
+            }
+        }
+    }
 }

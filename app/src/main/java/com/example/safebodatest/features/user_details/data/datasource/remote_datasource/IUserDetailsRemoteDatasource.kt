@@ -8,5 +8,7 @@ import com.example.safebodatest.core.failures.IFailure
 interface IUserDetailsRemoteDatasource : HttpHandler {
 
     suspend fun loadUserByUsername(username: String): Either<IFailure, User>
+    suspend fun loadUserFollowingsByUsername(username: String): Either<IFailure, List<User>>
+    suspend fun loadUserFollowersByUsername(username: String): Either<IFailure, List<User>>
 
 }

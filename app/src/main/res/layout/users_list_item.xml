@@ -5,9 +5,19 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="user"
             type="com.example.safebodatest.core.db.tables.User" />
+
+        <variable
+            name="isFollower"
+            type="Boolean" />
+
+        <variable
+            name="isFollowed"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/border_margin"
@@ -35,6 +45,37 @@
             app:layout_constraintStart_toEndOf="@id/image"
             app:layout_constraintTop_toTopOf="@id/image"
             tools:text="name" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/border_margin"
+            android:fontFamily="sans-serif"
+            android:text="@{user.name}"
+            app:layout_constraintStart_toEndOf="@id/image"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            tools:text="name" />
+
+        <TextView
+            android:id="@+id/following_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:visibility="@{isFollowed == true ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/followings"/>
+
+        <TextView
+            android:id="@+id/followed_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:visibility="@{isFollower == true ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/followers"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -37,9 +37,9 @@ class UserDetailsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_details)
         intent.extras?.getString(Keys.USERNAME)?.let { username ->
             loadUserByUsername(username)
+            val adapter = UserFollowViewPagerAdapter(username = username, activity = this)
+            binding.pager.adapter = adapter
         }
-        val adapter = UserFollowViewPagerAdapter(activity = this)
-        binding.pager.adapter = adapter
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, page ->
             tab.text = if(page != 0) "Followings" else "Followers"
         }.attach()
