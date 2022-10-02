@@ -11,9 +11,11 @@ import com.example.safebodatest.core.consts.Keys
 import com.example.safebodatest.core.db.AppDB
 import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.databinding.ActivityUserDetailsBinding
+import com.example.safebodatest.features.user_details.presentation.adapters.UserFollowViewPagerAdapter
 import com.example.safebodatest.features.user_details.presentation.viewModel.IUserDetailsViewModel
 import com.example.safebodatest.features.user_details.presentation.viewModel.UserDetailsViewModelImpl
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,6 +38,11 @@ class UserDetailsActivity : AppCompatActivity() {
         intent.extras?.getString(Keys.USERNAME)?.let { username ->
             loadUserByUsername(username)
         }
+        val adapter = UserFollowViewPagerAdapter(activity = this)
+        binding.pager.adapter = adapter
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, page ->
+            tab.text = if(page != 0) "Followings" else "Followers"
+        }.attach()
         setObservers()
     }
 
