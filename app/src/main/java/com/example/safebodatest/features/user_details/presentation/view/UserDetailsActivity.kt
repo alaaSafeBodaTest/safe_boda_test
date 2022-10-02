@@ -70,13 +70,13 @@ class UserDetailsActivity : AppCompatActivity() {
         Glide.with(this).load(user.avatar_url).placeholder(R.drawable.ic_baseline_account_circle_24)
             .error(R.drawable.ic_baseline_account_circle_24)
             .into(binding.avatarUrl)
-        binding.login.text = "Username: ${user.login}"
-        user.login?.let { binding.login.visibility = View.VISIBLE }
-        binding.fullName.text = "Full Name: ${user.name}"
-        user.name?.let { binding.fullName.visibility = View.VISIBLE }
-        binding.followers.text = "Followers: ${user.followers}"
-        user.followers?.let { binding.followers.visibility = View.VISIBLE }
-        binding.followings.text = "Followings: ${user.following}"
-        user.following?.let { binding.followings.visibility = View.VISIBLE }
+        binding.login.text = getString(R.string.username_label_with_value,user.login)
+        binding.login.visibility = if(user.login != null) View.VISIBLE else View.GONE
+        binding.fullName.text = getString(R.string.full_name_label_with_value,user.name)
+        binding.fullName.visibility = if(user.name != null) View.VISIBLE else View.GONE
+        binding.followers.text = getString(R.string.followers_label_with_value,user.followers.toString())
+        binding.followers.visibility = if(user.followers != null) View.VISIBLE else View.GONE
+        binding.followings.text = getString(R.string.followings_label_with_value,user.following.toString())
+        binding.followings.visibility = if(user.following != null) View.VISIBLE else View.GONE
     }
 }

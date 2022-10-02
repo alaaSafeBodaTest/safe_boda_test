@@ -62,7 +62,6 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:text='@{"Username: " + (user.login == null ? "" : user.login)}'
                         android:textAlignment="center"
                         android:visibility="@{user.login == null ? View.GONE : View.VISIBLE}"
                         tools:text="alaaIbrahim" />
@@ -73,7 +72,6 @@
                         android:layout_height="0dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-                        android:text='@{"Full Name: " + (user.name == null ? "" : user.name)}'
                         android:textAlignment="center"
                         android:visibility="@{user.name == null ? View.GONE : View.VISIBLE}"
                         tools:text="Alaa Ibrahim" />
@@ -84,7 +82,6 @@
                     android:id="@+id/bio_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text='@{user.bio == null ? "" : user.bio}'
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +102,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text='@{"Followers: "+(user.followers == null ? "0" : user.followers)}'
                         android:textAlignment="center"
                         tools:text="Followers" />
 
@@ -114,7 +110,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text='@{"Followings: "+(user.following == null ? "0" : user.following)}'
                         android:textAlignment="center"
                         tools:text="Followings" />
 

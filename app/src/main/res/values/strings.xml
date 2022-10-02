@@ -19,4 +19,8 @@
     <string name="search_for_user_name">search for user name</string>
     <string name="img">img</string>
     <string name="field_required">This field is required</string>
+    <string name="username_label_with_value">Username: %s</string>
+    <string name="full_name_label_with_value">Full Name: %s</string>
+    <string name="followers_label_with_value">Followers: %s</string>
+    <string name="followings_label_with_value">Followings: %s</string>
 </resources>
