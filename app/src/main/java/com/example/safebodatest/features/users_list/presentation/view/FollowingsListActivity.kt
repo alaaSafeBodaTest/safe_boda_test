@@ -3,7 +3,6 @@ package com.example.safebodatest.features.users_list.presentation.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,9 +11,12 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
+import com.example.safebodatest.core.consts.Keys
 import com.example.safebodatest.core.failures.IFailure
+import com.example.safebodatest.core.preferences.PreferenceManager
 import com.example.safebodatest.databinding.ActivityUsersListBinding
 import com.example.safebodatest.features.login.presentation.view.SignInActivity
+import com.example.safebodatest.features.user_details.presentation.view.UserDetailsActivity
 import com.example.safebodatest.features.users_list.presentation.adapter.FollowingsListAdapter
 import com.example.safebodatest.features.users_list.presentation.data_holder.FollowingListItem
 import com.example.safebodatest.features.users_list.presentation.view_model.FollowingsListViewModel
@@ -121,7 +123,7 @@ class FollowingsListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profile_homepage_menu_item -> {
-                Log.e(javaClass.simpleName, "onOptionsItemSelected: Profile Clicked")
+                onProfileClicked()
             }
             R.id.logout_homepage_menu_item -> {
                 lifecycleScope.launch(Dispatchers.IO) {
@@ -130,6 +132,14 @@ class FollowingsListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun onProfileClicked() {
+        val intent = Intent(this, UserDetailsActivity::class.java)
+        PreferenceManager(this).getInt(Keys.CURRENT_USER_ID)?.let {
+            intent.putExtra(Keys.USER_ID, it)
+        }
+        startActivity(intent)
     }
 
     private fun onLogoutClicked() {

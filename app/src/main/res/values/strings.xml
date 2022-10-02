@@ -11,4 +11,6 @@
     <string name="something_went_wrong">Something went wrong, please sign in</string>
     <string name="profile">Profile</string>
     <string name="log_out">Log Out</string>
+    <string name="user_image">User Image</string>
+    <string name="followers">Followers</string>
 </resources>

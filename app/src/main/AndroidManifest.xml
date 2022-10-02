@@ -17,10 +17,14 @@
         android:theme="@style/Theme.SafeBodaTest"
         tools:targetApi="31">
         <activity
+            android:name=".features.user_details.presentation.view.UserDetailsActivity"
+            android:exported="false"
+            android:label="User Details"/>
+        <activity
             android:name=".features.users_list.presentation.view.FollowingsListActivity"
+            android:exported="false"
             android:label="Followings List"
-            android:roundIcon="@drawable/safe_boda_icon"
-            android:exported="false" />
+            android:roundIcon="@drawable/safe_boda_icon" />
         <activity
             android:name=".features.splash_screen.presentation.view.SplashActivity"
             android:exported="true"
@@ -35,7 +39,7 @@
         <activity
             android:name=".features.login.presentation.view.SignInActivity"
             android:exported="true"
-            android:theme="@style/Theme.SafeBodaTest.SignIn"/>
+            android:theme="@style/Theme.SafeBodaTest.SignIn" />
     </application>
 
 </manifest>
