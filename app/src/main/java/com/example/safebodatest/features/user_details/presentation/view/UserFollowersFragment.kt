@@ -58,7 +58,7 @@ class UserFollowersFragment(val username: String? = null) : Fragment() {
             either.fold(ifLeft = {
                 Snackbar.make(binding.root, "${it?.message}", Snackbar.LENGTH_LONG).show()
             }, ifRight = {
-                adapter.setList(it)
+                adapter.addAll(it)
             })
         }
     }

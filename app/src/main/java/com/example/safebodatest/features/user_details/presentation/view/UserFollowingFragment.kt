@@ -1,10 +1,12 @@
 package com.example.safebodatest.features.user_details.presentation.view
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -50,7 +52,7 @@ class UserFollowingFragment(val username: String? = null) : Fragment() {
             either.fold(ifLeft = {
                 Snackbar.make(binding.root, "${it?.message}", Snackbar.LENGTH_LONG).show()
             }, ifRight = {
-                adapter.setList(it)
+                adapter.addAll(it)
             })
         }
     }
@@ -62,6 +64,13 @@ class UserFollowingFragment(val username: String? = null) : Fragment() {
     }
 
     private fun setViews() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, _, scrollY, _, _ ->
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                    username?.let { getUserFollowings(it) }
+                }
+            }
+        }
         adapter.listener = {
             it.login?.let { username -> goToUserDetails(username) }
         }

@@ -5,6 +5,7 @@ import com.example.safebodatest.core.api.ServiceGenerator
 import com.example.safebodatest.core.db.tables.User
 import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.failures.RemoteFailure
+import com.example.safebodatest.features.user_details.data.model.LoadUserFollowRequestModel
 import javax.inject.Inject
 
 class UserDetailsRemoteDatasourceImpl @Inject constructor() : IUserDetailsRemoteDatasource {
@@ -24,9 +25,9 @@ class UserDetailsRemoteDatasourceImpl @Inject constructor() : IUserDetailsRemote
         }
     }
 
-    override suspend fun loadUserFollowingsByUsername(username: String): Either<IFailure, List<User>> {
+    override suspend fun loadUserFollowingsByUsername(username: LoadUserFollowRequestModel): Either<IFailure, List<User>> {
         return handleRequest {
-            val response = ServiceGenerator.api.getUserFollowings(username)
+            val response = ServiceGenerator.api.getUserFollowings(page = username.page, username = username.username)
             return@handleRequest if (response.isSuccessful) {
                 val user = response.body()
                 if (user != null)
@@ -39,9 +40,9 @@ class UserDetailsRemoteDatasourceImpl @Inject constructor() : IUserDetailsRemote
         }
     }
 
-    override suspend fun loadUserFollowersByUsername(username: String): Either<IFailure, List<User>> {
+    override suspend fun loadUserFollowersByUsername(username: LoadUserFollowRequestModel): Either<IFailure, List<User>> {
         return handleRequest {
-            val response = ServiceGenerator.api.getUserFollowers(username)
+            val response = ServiceGenerator.api.getUserFollowers(page = username.page, username = username.username)
             return@handleRequest if (response.isSuccessful) {
                 val user = response.body()
                 if (user != null)

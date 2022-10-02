@@ -8,6 +8,8 @@ import com.example.safebodatest.core.failures.IFailure
 import com.example.safebodatest.core.network_utils.NetworkUtils
 import com.example.safebodatest.features.user_details.data.datasource.local_datasource.IUserDetailsLocalDatasource
 import com.example.safebodatest.features.user_details.data.datasource.remote_datasource.IUserDetailsRemoteDatasource
+import com.example.safebodatest.features.user_details.data.model.adapter.LoadUserFollowRequestEntityModelAdapter
+import com.example.safebodatest.features.user_details.domain.entity.LoadUserFollowRequestEntity
 import com.example.safebodatest.features.user_details.domain.repository.IUserDetailsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -42,13 +44,15 @@ class UserDetailsRepositoryImpl @Inject constructor(
         return localDatasource.loadUserByUsername(username)
     }
 
-    override suspend fun loadUserFollowingsByUsername(params: String): Either<IFailure, List<User>> {
-        val result = remoteDatasource.loadUserFollowingsByUsername(params)
+    override suspend fun loadUserFollowingsByUsername(params: LoadUserFollowRequestEntity): Either<IFailure, List<User>> {
+        val model = LoadUserFollowRequestEntityModelAdapter().toModel(params)
+        val result = remoteDatasource.loadUserFollowingsByUsername(model)
         return result
     }
 
-    override suspend fun loadUserFollowersByUsername(params: String): Either<IFailure, List<User>> {
-        val result = remoteDatasource.loadUserFollowersByUsername(params)
+    override suspend fun loadUserFollowersByUsername(params: LoadUserFollowRequestEntity): Either<IFailure, List<User>> {
+        val model = LoadUserFollowRequestEntityModelAdapter().toModel(params)
+        val result = remoteDatasource.loadUserFollowersByUsername(model)
         return result
     }
 }
