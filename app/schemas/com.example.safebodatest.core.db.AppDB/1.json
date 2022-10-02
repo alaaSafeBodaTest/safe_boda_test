@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bbc16d4e22cad494e809fb3da64c27f2",
+    "identityHash": "053426214e9a36e23c1dfe299c50edbe",
     "entities": [
       {
         "tableName": "User",
@@ -367,12 +367,44 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "follow_relation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`username` TEXT NOT NULL, `followingIds` TEXT NOT NULL, `followerIds` TEXT NOT NULL, PRIMARY KEY(`username`))",
+        "fields": [
+          {
+            "fieldPath": "username",
+            "columnName": "username",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "followingIds",
+            "columnName": "followingIds",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "followerIds",
+            "columnName": "followerIds",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "username"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bbc16d4e22cad494e809fb3da64c27f2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '053426214e9a36e23c1dfe299c50edbe')"
     ]
   }
 }

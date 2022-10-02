@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
 import com.example.safebodatest.core.consts.Keys
+import com.example.safebodatest.core.network_utils.NetworkUtils
 import com.example.safebodatest.databinding.FragmentUserFollowersBinding
 import com.example.safebodatest.features.user_details.presentation.adapters.UserFollowListAdapter
 import com.example.safebodatest.features.user_details.presentation.viewModel.IUserFollowListViewModel
@@ -58,7 +59,10 @@ class UserFollowersFragment(val username: String? = null) : Fragment() {
             either.fold(ifLeft = {
                 Snackbar.make(binding.root, "${it?.message}", Snackbar.LENGTH_LONG).show()
             }, ifRight = {
-                adapter.addAll(it)
+                if(NetworkUtils.hasInternetConnection(requireContext()))
+                    adapter.addAll(it)
+                else
+                    adapter.setList(it)
             })
         }
     }
