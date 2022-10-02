@@ -6,6 +6,9 @@ import com.example.safebodatest.core.db.AppDB
 import com.example.safebodatest.core.db.dao.FollowingDao
 import com.example.safebodatest.core.db.dao.UserDao
 import com.example.safebodatest.core.preferences.PreferenceManager
+import com.example.safebodatest.features.user_details.data.datasource.local_datasource.UserDetailsLocalDatasourceImpl
+import com.example.safebodatest.features.user_details.data.datasource.remote_datasource.UserDetailsRemoteDatasourceImpl
+import com.example.safebodatest.features.user_details.data.repository.UserDetailsRepositoryImpl
 import com.example.safebodatest.features.users_list.data.datasource.local_datasource.IFollowingsListLocalDatasource
 import com.example.safebodatest.features.users_list.data.datasource.remote_datasource.IFollowingsListRemoteDatasource
 import com.example.safebodatest.features.users_list.data.repository.FollowingsListRepositoryImpl
@@ -19,6 +22,13 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    fun getUserDetailsRepository(
+        @ApplicationContext appContext: Context,
+        localDatasource: UserDetailsLocalDatasourceImpl,
+        remoteDatasource: UserDetailsRemoteDatasourceImpl
+    ) = UserDetailsRepositoryImpl(context = appContext, localDatasource = localDatasource, remoteDatasource = remoteDatasource)
 
     @Provides
     fun getFollowingsListRepository(

@@ -12,6 +12,9 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE id IN (:ids)")
     suspend fun loadAllByIds(ids: IntArray): List<User>
 
+    @Query("SELECT * FROM user WHERE login IN (:usernames)")
+    suspend fun loadAllByUsernames(usernames: List<String>): List<User>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg users: User): List<Long>
 

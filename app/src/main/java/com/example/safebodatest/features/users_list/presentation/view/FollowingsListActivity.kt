@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.safebodatest.R
 import com.example.safebodatest.core.consts.Keys
 import com.example.safebodatest.core.failures.IFailure
-import com.example.safebodatest.core.preferences.PreferenceManager
+import com.example.safebodatest.core.user_utils.UserManager
 import com.example.safebodatest.databinding.ActivityUsersListBinding
 import com.example.safebodatest.features.login.presentation.view.SignInActivity
 import com.example.safebodatest.features.user_details.presentation.view.UserDetailsActivity
@@ -59,7 +59,7 @@ class FollowingsListActivity : AppCompatActivity() {
 
     private fun setViews() {
         adapter.listener = {
-            goToUserDetails(it.id)
+            it.login?.let { username -> goToUserDetails(username) }
         }
         binding.usersList.adapter = adapter
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -89,9 +89,9 @@ class FollowingsListActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToUserDetails(id: Int) {
+    private fun goToUserDetails(username: String) {
         val intent = Intent(this, UserDetailsActivity::class.java)
-        intent.putExtra(Keys.USER_ID, id)
+        intent.putExtra(Keys.USERNAME, username)
         startActivity(intent)
     }
 
@@ -144,8 +144,8 @@ class FollowingsListActivity : AppCompatActivity() {
     }
 
     private fun onProfileClicked() {
-        PreferenceManager(this).getInt(Keys.CURRENT_USER_ID)?.let {
-            goToUserDetails(it)
+        UserManager.getUser()?.let { user ->
+            user.login?.let { username -> goToUserDetails(username) }
         }
     }
 

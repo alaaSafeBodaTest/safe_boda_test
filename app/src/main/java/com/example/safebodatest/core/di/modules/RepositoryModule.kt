@@ -4,6 +4,8 @@ import com.example.safebodatest.features.login.data.repositories.LoginRepoImpl
 import com.example.safebodatest.features.login.domain.repositories.ILoginRepository
 import com.example.safebodatest.features.splash_screen.data.repository.SplashRepositoryImpl
 import com.example.safebodatest.features.splash_screen.domain.repository.ISplashRepository
+import com.example.safebodatest.features.user_details.data.repository.UserDetailsRepositoryImpl
+import com.example.safebodatest.features.user_details.domain.repository.IUserDetailsRepository
 import com.example.safebodatest.features.users_list.data.repository.FollowingsListRepositoryImpl
 import com.example.safebodatest.features.users_list.domain.repository.IFollowingsListRepository
 import dagger.Binds
@@ -14,6 +16,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    abstract fun getUserDetailsRepository(
+        repoImpl: UserDetailsRepositoryImpl
+    ): IUserDetailsRepository
 
     @Binds
     abstract fun getFollowingsListRepository(

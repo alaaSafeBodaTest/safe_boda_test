@@ -11,4 +11,6 @@ object URLs {
 
     const val FOLLOWINGS = "/user/following"
 
+    const val USER_BY_USERNAME = "/users/{username}"
+
 }
