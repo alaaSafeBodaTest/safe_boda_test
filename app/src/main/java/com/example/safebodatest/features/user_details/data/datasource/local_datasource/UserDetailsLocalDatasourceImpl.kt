@@ -110,7 +110,7 @@ class UserDetailsLocalDatasourceImpl @Inject constructor(private val db: AppDB) 
                 username, followingIds = toStore, followerIds = Gson().toJson(listOf<Int>())
             )
         }else{
-            option.followerIds = toStore
+            option.followingIds = toStore
         }
         db.followingRelationDao().insertAll(option)
         return Either.Right(followings)
