@@ -21,12 +21,14 @@ class FollowingsListAdapter @Inject constructor() :
         addAll(usersList)
     }
 
+    var listener: (FollowingListItem) -> Unit = {}
+
     @SuppressLint("NotifyDataSetChanged")
     fun addAll(usersList: List<FollowingListItem>) {
         list.addAll(usersList)
         val map = HashMap<Int, FollowingListItem>()
         list.forEach {
-            it.id?.let {id -> map[id] = it}
+            it.id.let { id -> map[id] = it}
         }
         list.clear()
         list.addAll(map.values)
@@ -47,6 +49,7 @@ class FollowingsListAdapter @Inject constructor() :
     override fun onBindViewHolder(holder: FollowingsListViewHolder, position: Int) {
         val item = list[position]
         val binding = holder.binding
+        binding.root.setOnClickListener { listener.invoke(item) }
         binding.user = item
         Glide.with(binding.root.context)
             .load(item.avatar_url)

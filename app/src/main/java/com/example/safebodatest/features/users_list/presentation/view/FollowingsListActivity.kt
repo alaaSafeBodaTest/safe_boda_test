@@ -58,6 +58,9 @@ class FollowingsListActivity : AppCompatActivity() {
     }
 
     private fun setViews() {
+        adapter.listener = {
+            goToUserDetails(it.id)
+        }
         binding.usersList.adapter = adapter
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView, _, scrollY, _, _ ->
@@ -84,6 +87,12 @@ class FollowingsListActivity : AppCompatActivity() {
                     println(it)
                 })
         }
+    }
+
+    private fun goToUserDetails(id: Int) {
+        val intent = Intent(this, UserDetailsActivity::class.java)
+        intent.putExtra(Keys.USER_ID, id)
+        startActivity(intent)
     }
 
     private fun onFailedRetrievingFollowings(it: IFailure?) {
@@ -135,11 +144,9 @@ class FollowingsListActivity : AppCompatActivity() {
     }
 
     private fun onProfileClicked() {
-        val intent = Intent(this, UserDetailsActivity::class.java)
         PreferenceManager(this).getInt(Keys.CURRENT_USER_ID)?.let {
-            intent.putExtra(Keys.USER_ID, it)
+            goToUserDetails(it)
         }
-        startActivity(intent)
     }
 
     private fun onLogoutClicked() {
